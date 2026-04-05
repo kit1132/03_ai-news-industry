@@ -4,10 +4,10 @@
 
 ## 特に追いたいもの
 
-- **ChatGPT（OpenAI）**: 新モデル、API変更、料金変更、新機能（GPTs、Canvas等）
-- **Gemini（Google）**: 新モデル、API変更、料金変更、Google Workspace連携
-- **Claude（Anthropic）**: 新モデル、API変更、料金変更、Claude Code・Desktop・Cowork等の全インターフェース。新機能・破壊的変更をリリース初日に導入する方針
-- **Copilot（Microsoft）**: M365 Copilot・GitHub Copilotの新機能、料金変更、エージェント機能
+- **AIプラットフォームの競争動向**: 主要プレイヤー（OpenAI / Google / Anthropic / Microsoft）の資金調達・評価額・IPO・パートナーシップ
+- **料金・ビジネスモデルの変更**: 値上げ・値下げ・プラン改定・消費税対応等、コンサル提案に影響する変更
+- **エンタープライズAI導入事例**: 定量成果（工数削減率・ROI等）を伴う導入事例
+- **新興AIツール・プロダクトのローンチ**: Product Hunt・GitHub Trending等で話題になったツール
 
 ### AI業界トレンド・市場シェア（コンサル提案の根拠用）
 
