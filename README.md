@@ -10,6 +10,9 @@ AIエージェント・開発ツールのニュースを毎朝自動収集し、
 
 
 
+## ビュー
+https://kit1132.github.io/03_ai-news-industry/
+
 ## Forkして使う場合
 
 ### Public vs Private リポジトリ
