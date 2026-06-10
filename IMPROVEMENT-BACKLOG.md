@@ -18,7 +18,7 @@
 
 ## 既知の取得障害
 
-- 全RSSフィード一括403（Google News RSS / GIGAZINE / The Decoder / VentureBeat / Publickey Atom / hnrss.org / Product Hunt / GitHub Trending 非公式RSS）: 403（初出: 不明・遅くとも 2026-06-07 には継続中 / 最終確認 2026-06-10）→ 回避策: WebSearch 経由で全ソース取得（運用安定）
+- 全RSSフィード一括403（Google News RSS / GIGAZINE / The Decoder / VentureBeat / Publickey Atom / hnrss.org / Product Hunt / GitHub Trending 非公式RSS）: 403（初出: 不明・遅くとも 2026-06-07 には継続中 / 最終確認 2026-06-11）→ 回避策: WebSearch 経由で全ソース取得（運用安定）
 
 ## アーカイブ（採用済み・見送り）
 
