@@ -17,11 +17,11 @@
 - **B-004: `daily-sources.md` 各ソースの「取得方法」欄を WebSearch 優先に書き換える**
   - 対象: `.claude/rules/sites/daily-sources.md`（最優先・高優先の各ソースの「取得方法」行、および凡例）
   - 変更内容: RSS/WebFetch が長期的に全滅（403継続）しているソース群について、取得方法の第一優先を「WebSearch」に変更し、RSS/WebFetch はフォールバック扱いに降格する
-  - 根拠: 全RSSフィード一括403が遅くとも 2026-06-07 から継続し、実運用は WebSearch フォールバックで安定している。`fetch-flow.md` の「回避策が安定している長期障害は取得方法欄を回避策ベースに書き換える提案を起票」規定に該当（最終確認 2026-07-11 / 回数 12）
+  - 根拠: 全RSSフィード一括403が遅くとも 2026-06-07 から継続し、実運用は WebSearch フォールバックで安定している。`fetch-flow.md` の「回避策が安定している長期障害は取得方法欄を回避策ベースに書き換える提案を起票」規定に該当（最終確認 2026-07-12 / 回数 13）
 
 ## 既知の取得障害
 
-- 全RSSフィード一括403（Google News RSS / GIGAZINE / The Decoder / VentureBeat / Publickey Atom / hnrss.org / Product Hunt / GitHub Trending 非公式RSS）: 403（初出: 不明・遅くとも 2026-06-07 には継続中 / 最終確認 2026-07-11）→ 回避策: WebSearch 経由で全ソース取得（運用安定）
+- 全RSSフィード一括403（Google News RSS / GIGAZINE / The Decoder / VentureBeat / Publickey Atom / hnrss.org / Product Hunt / GitHub Trending 非公式RSS）: 403（初出: 不明・遅くとも 2026-06-07 には継続中 / 最終確認 2026-07-12）→ 回避策: WebSearch 経由で全ソース取得（運用安定）
 
 ## アーカイブ（採用済み・見送り）
 
