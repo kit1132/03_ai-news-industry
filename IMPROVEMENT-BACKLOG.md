@@ -17,29 +17,34 @@
 - **B-004: `daily-sources.md` 各ソースの「取得方法」欄を WebSearch 優先に書き換える**
   - 対象: `.claude/rules/sites/daily-sources.md`（最優先・高優先の各ソースの「取得方法」行、および凡例）
   - 変更内容: RSS/WebFetch が長期的に全滅（403継続）しているソース群について、取得方法の第一優先を「WebSearch」に変更し、RSS/WebFetch はフォールバック扱いに降格する
-  - 根拠: 全RSSフィード一括403が遅くとも 2026-06-07 から継続し、実運用は WebSearch フォールバックで安定している。`fetch-flow.md` の「回避策が安定している長期障害は取得方法欄を回避策ベースに書き換える提案を起票」規定に該当（最終確認 2026-07-30 / 回数 31）
+  - 根拠: 全RSSフィード一括403が遅くとも 2026-06-07 から継続し、実運用は WebSearch フォールバックで安定している。`fetch-flow.md` の「回避策が安定している長期障害は取得方法欄を回避策ベースに書き換える提案を起票」規定に該当（最終確認 2026-07-31 / 回数 32）
 
 - **B-005: 二次情報の数値が食い違う場合の記載ルールを `fetch-flow.md` に追加**
   - 対象: `.claude/rules/sites/fetch-flow.md`（「WebSearch利用時の注意事項」セクション）
   - 変更内容: 「一次情報に WebFetch で到達できず、WebSearch のスニペットのみで数値・条件が複数系統に割れる場合は、どちらか一方を採用せず『報道で幅がある』旨と複数の値を併記し、一次ソースが確認できなかった事実も明記する」という規定を追加する
-  - 根拠: 2026-07-28 の Kimi K3 で、ウェイト容量が「約594GB」と「約1.4TB（MXFP4）」、ライセンスが「Modified MIT」「Apache 2.0」「revenue-tiered 独自ライセンス」の3系統に割れたが、一次ソースである Hugging Face のモデルカードが403で確認できず、採否の判断基準が現ルールに存在しなかった（最終確認 2026-07-28 / 回数 1）
+  - 根拠: 2026-07-28 の Kimi K3 で、ウェイト容量が「約594GB」と「約1.4TB（MXFP4）」、ライセンスが「Modified MIT」「Apache 2.0」「revenue-tiered 独自ライセンス」の3系統に割れたが、一次ソースである Hugging Face のモデルカードが403で確認できず、採否の判断基準が現ルールに存在しなかった（最終確認 2026-07-31 / 回数 2。2026-07-31 の Amazon FY26 Q2 決算でも売上$181.52B 系と会社ガイダンス$194–199B 系で二次情報が割れ、一次 IR ページが403で確認できず同じ判断を要した）
 
 - **B-006: MCP 公式ブログ（`blog.modelcontextprotocol.io`）を日次ソースに追加**
   - 対象: `.claude/rules/sites/daily-sources.md`「最優先（日次ニュースソース）」セクション
   - 変更内容: `blog.modelcontextprotocol.io`（RSS: `blog.modelcontextprotocol.io/rss.xml`）を最優先ソースとして追加し、取得方法は「WebFetch → WebSearch」、頻度は毎日確認とする
-  - 根拠: 2026-07-28 の MCP 2026-07-28 仕様公開は本リポジトリの主要関心（エージェント接続・権限統制）に直撃したが、現行の `daily-sources.md` に MCP の一次ソースがなく、Publickey / VentureBeat 経由の二次報道でしか捕捉できない。今日は WebFetch 広範403のなかで当ドメインへ WebFetch が成功し、非推奨機能・SDK 対応状況など二次報道にない一次情報を取得できた。MCP/ARD は 2026-07-14 に「エージェントの接続・権限・発見が主戦場」として収録済みで、継続ウォッチ対象と整合する（最終確認 2026-07-30 / 回数 2。RSS は `/rss.xml` が404のため取得方法は「トップページ WebFetch → WebSearch」とする）
+  - 根拠: 2026-07-28 の MCP 2026-07-28 仕様公開は本リポジトリの主要関心（エージェント接続・権限統制）に直撃したが、現行の `daily-sources.md` に MCP の一次ソースがなく、Publickey / VentureBeat 経由の二次報道でしか捕捉できない。今日は WebFetch 広範403のなかで当ドメインへ WebFetch が成功し、非推奨機能・SDK 対応状況など二次報道にない一次情報を取得できた。MCP/ARD は 2026-07-14 に「エージェントの接続・権限・発見が主戦場」として収録済みで、継続ウォッチ対象と整合する（最終確認 2026-07-31 / 回数 3。RSS は `/rss.xml` が404のため取得方法は「トップページ WebFetch → WebSearch」とする。2026-07-31 も WebFetch 広範403のなか当ドメインのトップページのみ成功しており、回避策の安定性が再確認できた）
 
 - **B-007: 主要クラウド4社の IR 決算ページを四半期定点ソースとして追加**
   - 対象: `.claude/rules/sites/daily-sources.md`「高優先（四半期・月次データソース）」セクション
   - 変更内容: Microsoft / Alphabet / Amazon / Meta の IR 決算プレスリリースページを四半期ソースとして追加する。取得方法は「IR一次ページを WebFetch → WebSearch」、頻度は「1月・4月・7月・10月の決算発表週は毎日確認、それ以外は確認不要」とする
-  - 根拠: 2026-07-30 に Microsoft FY26 Q4 / Meta Q2 2026 から Azure 成長率+43%・M365 Copilot 有料シート3,000万超・capex 実績という提案直結の一次数値を採録したが、これらは現行 `daily-sources.md` に定点ソースがなく、決算カレンダーを手がかりに都度検索して拾っている。当日は `microsoft.com/en-us/Investor/...` の WebFetch のみ成功し、`prnewswire.com` / `sec.gov` / `investor.atmeta.com` は403だった。IR ページを名指しで登録すれば403回避の当たり先が固定でき、Copilot シート数のような年次更新では追えない指標を四半期粒度で継続取得できる（最終確認 2026-07-30 / 回数 1）
+  - 根拠: 2026-07-30 に Microsoft FY26 Q4 / Meta Q2 2026 から Azure 成長率+43%・M365 Copilot 有料シート3,000万超・capex 実績という提案直結の一次数値を採録したが、これらは現行 `daily-sources.md` に定点ソースがなく、決算カレンダーを手がかりに都度検索して拾っている。当日は `microsoft.com/en-us/Investor/...` の WebFetch のみ成功し、`prnewswire.com` / `sec.gov` / `investor.atmeta.com` は403だった。IR ページを名指しで登録すれば403回避の当たり先が固定でき、Copilot シート数のような年次更新では追えない指標を四半期粒度で継続取得できる（最終確認 2026-07-31 / 回数 2。2026-07-31 の Amazon FY26 Q2 / Apple FY26 Q3 でも同じ問題が再発し、`aboutamazon.com` の IR リリースと `cnbc.com` の決算記事がいずれも403で Amazon の確報値を一次確認できなかった。登録先には Apple も加える）
+
+- **B-008: 取りこぼし検知用の週次スイープを設ける（TLDR AI を「必要時に参照」から「高優先」へ昇格）**
+  - 対象: `.claude/rules/sites/daily-sources.md`（`tldr.tech/ai` の記載を「必要時に参照 > ニュースメディア・ニュースレター」から「高優先（四半期・月次データソース）」へ移動し、頻度欄を新設）
+  - 変更内容: 頻度を「週1回。直近7日分の見出しを通読し、`.last-check-state.md` に未収録の項目を catch-up 収録する」とする。取得方法は「WebSearch」
+  - 根拠: 2026-07-31 に AMD × Anthropic の最大2GW 提携・最大$5B 出資（7/22 発表）を9日遅れ、EU デジタルオムニバス Regulation (EU) 2026/1744（7/24 官報掲載・7/27 発効）を7日遅れで catch-up 収録した。前者は Anthropic の計算基盤が4ベンダー構成になるという調達前提の変更、後者は EU 高リスクAIの適用時期が最大16カ月ずれるという提案直結の一次情報でありながら、日次の WebSearch では当日の話題に埋もれて捕捉できなかった。現行 `daily-sources.md` は TLDR AI を「取りこぼし検知に有用」と評価しながら頻度を定めておらず、実運用で参照されていない（最終確認 2026-07-31 / 回数 1）
 
 ## 既知の取得障害
 
-- 全RSSフィード一括403（Google News RSS / GIGAZINE / The Decoder / VentureBeat / Publickey Atom / hnrss.org / Product Hunt / GitHub Trending 非公式RSS）: 403（初出: 不明・遅くとも 2026-06-07 には継続中 / 最終確認 2026-07-30）→ 回避策: WebSearch 経由で全ソース取得（運用安定）
-- MCP 公式ブログ RSS（`blog.modelcontextprotocol.io/rss.xml`）: 404（初出 2026-07-30 / 最終確認 2026-07-30）→ 回避策: トップページ `blog.modelcontextprotocol.io/` を WebFetch（成功・記事一覧と日付を取得可）
+- 全RSSフィード一括403（Google News RSS / GIGAZINE / The Decoder / VentureBeat / Publickey Atom / hnrss.org / Product Hunt / GitHub Trending 非公式RSS）: 403（初出: 不明・遅くとも 2026-06-07 には継続中 / 最終確認 2026-07-31）→ 回避策: WebSearch 経由で全ソース取得（運用安定）
+- MCP 公式ブログ RSS（`blog.modelcontextprotocol.io/rss.xml`）: 404（初出 2026-07-30 / 最終確認 2026-07-31）→ 回避策: トップページ `blog.modelcontextprotocol.io/` を WebFetch（成功・記事一覧と日付を取得可）
 - Ledge.ai（`ledge.ai`）: WebFetch 403（初出 2026-07-16 / 最終確認 2026-07-16）→ 回避策: WebSearch のスニペットで代替（本文取得は不可・手動確認推奨）
-- 記事本文・一次情報ページの WebFetch 広範403（`forbes.com` / `itmedia.co.jp` / `publickey1.jp` / `mlq.ai` / `buildfastwithai.com` / `venturebeat.com` / `unite.ai` / `huggingface.co` モデルカード / `champaignmagazine.com` / `stacktr.ee` / `workos.com` / `releasebot.io` / `blogs.nvidia.com` / `investing.com` / `tech-noisy.com` / `anthropic.com` / `claude.com` / `prnewswire.com` / `sec.gov` / `investor.atmeta.com` / `axios.com` / `buildfastwithai.com`）: 403（初出 2026-07-27 / 最終確認 2026-07-30。2026-07-28 に Hugging Face のモデルカード等の一次情報ページへ対象が拡大し、WebFetch は実質全滅に近い。2026-07-29 は `blog.modelcontextprotocol.io` のみ、2026-07-30 は同ドメインと `microsoft.com/en-us/Investor/...` のみ WebFetch 成功）→ 回避策: WebSearch のスニペットで代替（本文取得は不可・数値の裏取りは複数スニペットの突き合わせで実施）
+- 記事本文・一次情報ページの WebFetch 広範403（`forbes.com` / `itmedia.co.jp` / `publickey1.jp` / `mlq.ai` / `buildfastwithai.com` / `venturebeat.com` / `unite.ai` / `huggingface.co` モデルカード / `champaignmagazine.com` / `stacktr.ee` / `workos.com` / `releasebot.io` / `blogs.nvidia.com` / `investing.com` / `tech-noisy.com` / `anthropic.com` / `claude.com` / `prnewswire.com` / `sec.gov` / `investor.atmeta.com` / `axios.com` / `buildfastwithai.com` / `aboutamazon.com` / `cnbc.com` / `the-decoder.com` フィード）: 403（初出 2026-07-27 / 最終確認 2026-07-31。2026-07-28 に Hugging Face のモデルカード等の一次情報ページへ対象が拡大し、WebFetch は実質全滅に近い。2026-07-29 は `blog.modelcontextprotocol.io` のみ、2026-07-30 は同ドメインと `microsoft.com/en-us/Investor/...` のみ、2026-07-31 は同ドメインのみ WebFetch 成功）→ 回避策: WebSearch のスニペットで代替（本文取得は不可・数値の裏取りは複数スニペットの突き合わせで実施）
 
 ## アーカイブ（採用済み・見送り）
 
