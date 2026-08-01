@@ -90,6 +90,18 @@ RSS URLの記載がないソースはRSS未提供。年次レポートは公開�
 - 頻度: 週1回確認
 - 備考: 2026-06-07〜06-09 に3日連続「更新なし」のため毎日→週1回に変更（B-003採用、2026-06-10）。速報性不要の調査データであり数日遅れは許容
 
+### モデル API 料金（主要3社）
+- URL（OpenAI）: https://platform.openai.com/docs/pricing および https://openai.com/index/ の料金告知
+- URL（Anthropic）: https://www.anthropic.com/pricing
+- URL（Google）: https://ai.google.dev/gemini-api/docs/pricing
+- 検索キーワード（WebSearch用）: `OpenAI API pricing change 2026` / `Anthropic Claude API pricing 2026` / `Gemini API pricing update 2026` / `LLM API price cut 2026`
+- 取得方法: WebSearch → WebFetch
+- 注目点: ティア別の入力・出力単価、キャッシュ単価、値下げ/値上げ、モデル退役に伴う単価改定
+- 頻度: 毎日確認
+- 備考: 2026-08-02 追加（B-009採用）。`ai-tools.md` は「料金・ビジネスモデルの変更」を提案直結の最重要関心に挙げているのに、API 単価の定点ソースが1件も無かった。
+  **既存の Business Insider Japan（B-002）は国内向け主要サービスの月次早見表であり、API のティア別単価を告知当日の粒度では追えない。** 2026-08-01 に OpenAI の GPT-5.6 値下げ（Luna 80%減・Terra 20%減、7/30 実施）を1日遅れで二次報道から捕捉した実例がある。
+  ⚠️ **一次ページは403が常態**（`platform.openai.com` / `www.anthropic.com` / `ai.google.dev` はいずれも到達不可を実測済み）。WebSearch をプライマリとし、値の裏取りは複数の二次スニペットの突き合わせと `.last-check-state.md` の旧単価との整合確認で行う。二次情報が割れた場合は `fetch-flow.md` の併記ルールに従う
+
 
 ## 高優先（四半期・月次データソース）
 
@@ -127,33 +139,35 @@ RSS URLの記載がないソースはRSS未提供。年次レポートは公開�
 
 ## 年次レポート（公開時期に合わせて確認）
 
+⚠️ **公開想定月は「毎日確認」とする**（B-010採用、2026-08-02）。年次レポートは公開が単日に集中するため、週1回の確認では最大6日の遅延が構造的に生じる。実例: 2026-07-24 公表の令和8年版 情報通信白書を 08-02 まで**9日間**捕捉できなかった（企業の生成AI業務利用 86.4%〈前年度 55.2%〉・個人の利用経験 58.8%〈同 26.7%〉・業務変革で「組織的な取組はない」が日本 27.0% 対 米国 1.4% という、提案の前提数値を直接置き換える内容だった）。**取りこぼしの原因は登録漏れではなく頻度設定にある。**
+
 ### McKinsey State of AI
 - URL: https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai
 - 検索キーワード（WebSearch用）: `McKinsey State of AI survey 2026`
 - 取得方法: WebSearch
 - 注目点: 企業AI導入率、AIエージェント浸透度。完全無料。経営層への訴求力が高い
-- 頻度: 年次公開（春頃）。3〜5月は週1回
+- 頻度: 年次公開（春頃）。**3〜5月は毎日確認**（公開月が「春頃」としか特定できないため、想定期間すべてを毎日確認とする。B-010採用、2026-08-02）
 
 ### Stanford HAI AI Index
 - URL: https://hai.stanford.edu/ai-index
 - 検索キーワード（WebSearch用）: `Stanford HAI AI Index Report 2026`
 - 取得方法: WebSearch
 - 注目点: 市場全体感の概観。完全無料。投資動向・技術進化・導入率・政策を1レポートで網羅
-- 頻度: 年次公開（4月）。3〜5月は週1回
+- 頻度: 年次公開（4月）。**4月は毎日確認**、3月・5月は週1回（B-010採用、2026-08-02）
 
 ### 総務省 情報通信白書
 - URL: https://www.soumu.go.jp/johotsusintokei/whitepaper/
 - 検索キーワード（WebSearch用）: `総務省 情報通信白書 AI 2026`
 - 取得方法: WebSearch
 - 注目点: 日本のAI利用率の国際比較（日米独中4カ国）。完全無料。Excel/CSVデータあり
-- 頻度: 年次公開（7月）。6〜8月は週1回
+- 頻度: 年次公開（7月）。**7月は毎日確認**、6月・8月は週1回（B-010採用、2026-08-02）
 
 ### a16z Top 100 Gen AI Consumer Apps
 - URL: https://a16z.com/100-gen-ai-apps/
 - 検索キーワード（WebSearch用）: `a16z top 100 gen AI consumer apps 2026`
 - 取得方法: WebSearch
 - 注目点: Similarweb＋Sensor Towerデータに基づくAIアプリランキング（Web Top50＋モバイルTop50）。完全無料
-- 頻度: 半年更新。1月・7月頃は週1回
+- 頻度: 半年更新。**1月・7月は毎日確認**（B-010採用、2026-08-02）
 
 ### Gartner Magic Quadrant
 - URL: https://www.gartner.com
