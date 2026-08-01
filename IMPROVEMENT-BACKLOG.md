@@ -17,7 +17,7 @@
 - **B-004: `daily-sources.md` 各ソースの「取得方法」欄を WebSearch 優先に書き換える**
   - 対象: `.claude/rules/sites/daily-sources.md`（最優先・高優先の各ソースの「取得方法」行、および凡例）
   - 変更内容: RSS/WebFetch が長期的に全滅（403継続）しているソース群について、取得方法の第一優先を「WebSearch」に変更し、RSS/WebFetch はフォールバック扱いに降格する
-  - 根拠: 全RSSフィード一括403が遅くとも 2026-06-07 から継続し、実運用は WebSearch フォールバックで安定している。`fetch-flow.md` の「回避策が安定している長期障害は取得方法欄を回避策ベースに書き換える提案を起票」規定に該当（最終確認 2026-08-01 / 回数 33）
+  - 根拠: 全RSSフィード一括403が遅くとも 2026-06-07 から継続し、実運用は WebSearch フォールバックで安定している。`fetch-flow.md` の「回避策が安定している長期障害は取得方法欄を回避策ベースに書き換える提案を起票」規定に該当（最終確認 2026-08-02 / 回数 34）
 
 - **B-005: 二次情報の数値が食い違う場合の記載ルールを `fetch-flow.md` に追加**
   - 対象: `.claude/rules/sites/fetch-flow.md`（「WebSearch利用時の注意事項」セクション）
@@ -37,19 +37,24 @@
 - **B-008: 取りこぼし検知用の週次スイープを設ける（TLDR AI を「必要時に参照」から「高優先」へ昇格）**
   - 対象: `.claude/rules/sites/daily-sources.md`（`tldr.tech/ai` の記載を「必要時に参照 > ニュースメディア・ニュースレター」から「高優先（四半期・月次データソース）」へ移動し、頻度欄を新設）
   - 変更内容: 頻度を「週1回。直近7日分の見出しを通読し、`.last-check-state.md` に未収録の項目を catch-up 収録する」とする。取得方法は「WebSearch」
-  - 根拠: 2026-07-31 に AMD × Anthropic の最大2GW 提携・最大$5B 出資（7/22 発表）を9日遅れ、EU デジタルオムニバス Regulation (EU) 2026/1744（7/24 官報掲載・7/27 発効）を7日遅れで catch-up 収録した。前者は Anthropic の計算基盤が4ベンダー構成になるという調達前提の変更、後者は EU 高リスクAIの適用時期が最大16カ月ずれるという提案直結の一次情報でありながら、日次の WebSearch では当日の話題に埋もれて捕捉できなかった。現行 `daily-sources.md` は TLDR AI を「取りこぼし検知に有用」と評価しながら頻度を定めておらず、実運用で参照されていない（最終確認 2026-08-01 / 回数 2。2026-08-01 も JetBrains Context の早期アクセス提供〈7/21 開始〉を10日遅れで捕捉しており、日次 WebSearch が当日話題に偏る傾向が再確認できた）
+  - 根拠: 2026-07-31 に AMD × Anthropic の最大2GW 提携・最大$5B 出資（7/22 発表）を9日遅れ、EU デジタルオムニバス Regulation (EU) 2026/1744（7/24 官報掲載・7/27 発効）を7日遅れで catch-up 収録した。前者は Anthropic の計算基盤が4ベンダー構成になるという調達前提の変更、後者は EU 高リスクAIの適用時期が最大16カ月ずれるという提案直結の一次情報でありながら、日次の WebSearch では当日の話題に埋もれて捕捉できなかった。現行 `daily-sources.md` は TLDR AI を「取りこぼし検知に有用」と評価しながら頻度を定めておらず、実運用で参照されていない（最終確認 2026-08-02 / 回数 3。2026-08-01 も JetBrains Context の早期アクセス提供〈7/21 開始〉を10日遅れで捕捉しており、日次 WebSearch が当日話題に偏る傾向が再確認できた。2026-08-02 は総務省 令和8年版情報通信白書〈7/24 公表〉を9日遅れで捕捉しており、年次レポートの取りこぼしも同じ傾向にある。ただし白書は `daily-sources.md` に定点ソースとして登録済みで、頻度設定側の問題として B-010 に分離した）
 
 - **B-009: 主要3社のモデル API 料金ページを日次定点ソースとして追加する**
   - 対象: `.claude/rules/sites/daily-sources.md`「最優先（日次ニュースソース）」セクション
   - 変更内容: OpenAI（`platform.openai.com/docs/pricing` および `openai.com/index/` の料金告知）/ Anthropic（`anthropic.com/pricing`）/ Google（`ai.google.dev/gemini-api/docs/pricing`）の料金ページを日次ソースとして追加する。取得方法は「WebSearch → WebFetch」とし（後述のとおり一次ページは403が常態）、頻度は毎日確認とする
   - 根拠: `ai-tools.md` は「料金・ビジネスモデルの変更」をコンサル提案に直結する最重要関心の一つに挙げているが、現行 `daily-sources.md` にモデル API 単価の定点ソースが1件も無い。既存の Business Insider Japan（B-002 で採用済み）は国内向け主要サービスの月次早見表であり、API のティア別単価を告知当日の粒度では追えない。2026-08-01 に OpenAI の GPT-5.6 値下げ（Luna 80%減・Terra 20%減、7/30 実施）を1日遅れで二次報道から捕捉したが、これは提案の見積り前提を直接動かす変更だった。当日は一次告知ページ `openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/` が403で、値の裏取りは複数の二次スニペットの突き合わせと `.last-check-state.md` の旧単価（Luna $1／$6）との整合確認で行っている（最終確認 2026-08-01 / 回数 1）
 
+- **B-010: 総務省 情報通信白書の確認頻度を公開月は毎日へ引き上げる**
+  - 対象: `.claude/rules/sites/daily-sources.md`「年次レポート（公開時期に合わせて確認）」＞「総務省 情報通信白書」の頻度欄
+  - 変更内容: 現在の「年次公開（7月）。6〜8月は週1回」を「7月は毎日確認。6月・8月は週1回」に変更する。あわせて他の年次レポート（Stanford HAI AI Index 4月 / McKinsey State of AI 春 / a16z Top 100 1月・7月）についても、公開想定月のみ毎日確認とする
+  - 根拠: 2026-07-24 公表の令和8年版情報通信白書を 2026-08-02 まで9日間捕捉できなかった。内容は企業の生成AI業務利用 86.4%（前年度 55.2%）・個人の利用経験 58.8%（同 26.7%）・業務変革で「組織的な取組はない」が日本 27.0% 対 米国 1.4% という、提案の前提数値を直接置き換えるものだった。当該ソースは既に `daily-sources.md` に登録済みで、取りこぼしの原因は登録漏れではなく頻度設定にある。年次レポートは公開が単日に集中し、週1回の確認では最大6日の遅延が構造的に生じる（最終確認 2026-08-02 / 回数 1）
+
 ## 既知の取得障害
 
 - 全RSSフィード一括403（Google News RSS / GIGAZINE / The Decoder / VentureBeat / Publickey Atom / hnrss.org / Product Hunt / GitHub Trending 非公式RSS）: 403（初出: 不明・遅くとも 2026-06-07 には継続中 / 最終確認 2026-07-31）→ 回避策: WebSearch 経由で全ソース取得（運用安定）
 - MCP 公式ブログ RSS（`blog.modelcontextprotocol.io/rss.xml`）: 404（初出 2026-07-30 / 最終確認 2026-07-31）→ 回避策: トップページ `blog.modelcontextprotocol.io/` を WebFetch（成功・記事一覧と日付を取得可）
 - Ledge.ai（`ledge.ai`）: WebFetch 403（初出 2026-07-16 / 最終確認 2026-07-16）→ 回避策: WebSearch のスニペットで代替（本文取得は不可・手動確認推奨）
-- 記事本文・一次情報ページの WebFetch 広範403（`forbes.com` / `itmedia.co.jp` / `publickey1.jp` / `mlq.ai` / `buildfastwithai.com` / `venturebeat.com` / `unite.ai` / `huggingface.co` モデルカード / `champaignmagazine.com` / `stacktr.ee` / `workos.com` / `releasebot.io` / `blogs.nvidia.com` / `investing.com` / `tech-noisy.com` / `anthropic.com` / `claude.com` / `prnewswire.com` / `sec.gov` / `investor.atmeta.com` / `axios.com` / `buildfastwithai.com` / `aboutamazon.com` / `cnbc.com` / `the-decoder.com` フィード / `openai.com` / `explainx.ai`）: 403（初出 2026-07-27 / 最終確認 2026-08-01。2026-07-28 に Hugging Face のモデルカード等の一次情報ページへ対象が拡大し、WebFetch は実質全滅に近い。2026-07-29 は `blog.modelcontextprotocol.io` のみ、2026-07-30 は同ドメインと `microsoft.com/en-us/Investor/...` のみ、2026-07-31 は同ドメインのみ WebFetch 成功。**2026-08-01 は WebFetch 成功ドメインが1件も無く、`openai.com` の料金告知ページと `publickey1.jp` の記事本文がいずれも403**）→ 回避策: WebSearch のスニペットで代替（本文取得は不可・数値の裏取りは複数スニペットの突き合わせで実施）
+- 記事本文・一次情報ページの WebFetch 広範403（`forbes.com` / `itmedia.co.jp` / `publickey1.jp` / `mlq.ai` / `buildfastwithai.com` / `venturebeat.com` / `unite.ai` / `huggingface.co` モデルカード / `champaignmagazine.com` / `stacktr.ee` / `workos.com` / `releasebot.io` / `blogs.nvidia.com` / `investing.com` / `tech-noisy.com` / `anthropic.com` / `claude.com` / `prnewswire.com` / `sec.gov` / `investor.atmeta.com` / `axios.com` / `buildfastwithai.com` / `aboutamazon.com` / `cnbc.com` / `the-decoder.com` フィード / `openai.com` / `explainx.ai` / `soumu.go.jp` / `innovatopia.jp`）: 403（初出 2026-07-27 / 最終確認 2026-08-02。2026-07-28 に Hugging Face のモデルカード等の一次情報ページへ対象が拡大し、WebFetch は実質全滅に近い。2026-07-29 は `blog.modelcontextprotocol.io` のみ、2026-07-30 は同ドメインと `microsoft.com/en-us/Investor/...` のみ、2026-07-31 は同ドメインのみ WebFetch 成功。**2026-08-01 は WebFetch 成功ドメインが1件も無く、`openai.com` の料金告知ページと `publickey1.jp` の記事本文がいずれも403。2026-08-02 も成功ドメインは0件で、政府一次ソースである `soumu.go.jp` の白書概要PDF と `innovatopia.jp` の解説記事がいずれも403**）→ 回避策: WebSearch のスニペットで代替（本文取得は不可・数値の裏取りは複数スニペットの突き合わせで実施）
 
 ## アーカイブ（採用済み・見送り）
 
