@@ -95,12 +95,17 @@ RSS URLの記載がないソースはRSS未提供。年次レポートは公開�
 - URL（Anthropic）: https://www.anthropic.com/pricing
 - URL（Google）: https://ai.google.dev/gemini-api/docs/pricing
 - 検索キーワード（WebSearch用）: `OpenAI API pricing change 2026` / `Anthropic Claude API pricing 2026` / `Gemini API pricing update 2026` / `LLM API price cut 2026`
-- 取得方法: WebSearch → WebFetch
+- 取得方法: Google は WebFetch（一次）→ 失敗時 WebSearch。OpenAI / Anthropic は WebSearch（一次ページはオリジン403のため到達不可）
 - 注目点: ティア別の入力・出力単価、キャッシュ単価、値下げ/値上げ、モデル退役に伴う単価改定
 - 頻度: 毎日確認
 - 備考: 2026-08-02 追加（B-009採用）。`ai-tools.md` は「料金・ビジネスモデルの変更」を提案直結の最重要関心に挙げているのに、API 単価の定点ソースが1件も無かった。
   **既存の Business Insider Japan（B-002）は国内向け主要サービスの月次早見表であり、API のティア別単価を告知当日の粒度では追えない。** 2026-08-01 に OpenAI の GPT-5.6 値下げ（Luna 80%減・Terra 20%減、7/30 実施）を1日遅れで二次報道から捕捉した実例がある。
-  ⚠️ **一次ページは403が常態**（`platform.openai.com` / `www.anthropic.com` / `ai.google.dev` はいずれも到達不可を実測済み）。WebSearch をプライマリとし、値の裏取りは複数の二次スニペットの突き合わせと `.last-check-state.md` の旧単価との整合確認で行う。二次情報が割れた場合は `fetch-flow.md` の併記ルールに従う
+  ⚠️ **2026-08-03 更新: ベンダーごとに到達可否が分かれた。** 実行環境のネットワークポリシーに許可ドメインを追加した結果、`ai.google.dev` が復旧した。
+  - **Google（`ai.google.dev`）**: WebFetch で一次取得する（2026-08-03 に `curl` 200 を確認）。Gemini API のティア別単価は一次ページで確定させ、二次スニペットに頼らない
+  - **OpenAI（`platform.openai.com` / `openai.com`）**: WebSearch を継続する。許可リスト追加でゲートウェイ拒否は解消したが、**ゲートウェイを抜けた先でサイト側が HTTP 403 を返す**ため一次本文は読めない（`www.anthropic.com` と同じ類型）
+  - **Anthropic（`www.anthropic.com`）**: WebSearch を継続する（オリジン403が 2026-04-02 以降継続）
+
+  OpenAI / Anthropic の値の裏取りは、複数の二次スニペットの突き合わせと `.last-check-state.md` の旧単価との整合確認で行う。二次情報が割れた場合は `fetch-flow.md` の併記ルールに従う
 
 
 ## 高優先（四半期・月次データソース）
