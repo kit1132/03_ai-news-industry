@@ -60,6 +60,9 @@ git push origin HEAD:main           # ← 必ず main に直接 push する
 
 1. `digests/YYYY/MM/ai-news-YYYY-MM-DD.md` を生成（ディレクトリがなければ作成）
 2. `.last-check-state.md` を更新
+   - 各ソースの差分判定用の状態を書き換える
+   - **不可逆な期限（B-027）**: 本日触れた一次ソースに紐づく期限について、撤回・延期・適用範囲の変化を確認した結果を書く。撤回済みは削除せず「撤回済み」と明示。期限到来を確認したら結果を書いて期限扱いから外す。退役・廃止ページを読んだ日は掲載期限を全件取り込む
+   - **週次スイープ実施日（B-008）**: TLDR AI と 14日遡り・テーマ欠け・同日併走変更などの結果を1行残す
 3. `IMPROVEMENT-BACKLOG.md` を更新（新規提案の起票・既出提案の回数更新・障害の最終確認日更新。`output-style.md` の改善メモ規定参照）
 4. `files.json` の配列先頭に新ファイルのパス（`digests/YYYY/MM/ai-news-YYYY-MM-DD.md`）を追加
 5. **`git push origin HEAD:main` で main に直接 push する**（上の絶対ルール参照。`IMPROVEMENT-BACKLOG.md` を含めること）
