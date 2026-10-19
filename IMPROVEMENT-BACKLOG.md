@@ -66,6 +66,7 @@
 
 ## 既知の取得障害
 
+- Notebookcheck（`www.notebookcheck.net`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-10-20 / 最終確認 2026-10-20）→ 回避策: WebSearch のスニペットと GIGAZINE の引用で代替（OpenCode 侵害の被害額）
 - Carly（`usecarly.com`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-10-14 / 最終確認 2026-10-14）→ 回避策: WebSearch のスニペットで代替（Meta Muse Wonder）
 - Technology.org（`www.technology.org`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 で分類。初出 2026-10-14 / 最終確認 2026-10-14）→ 回避策: WebSearch のスニペットで代替
 - Yahoo Tech（`tech.yahoo.com`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 で分類。初出 2026-10-14 / 最終確認 2026-10-14）→ 回避策: WebSearch のスニペットで代替
