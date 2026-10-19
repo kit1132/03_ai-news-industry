@@ -91,23 +91,34 @@ RSS URLの記載がないソースはRSS未提供。年次レポートは公開�
 - 備考: 2026-06-07〜06-09 に3日連続「更新なし」のため毎日→週1回に変更（B-003採用、2026-06-10）。速報性不要の調査データであり数日遅れは許容
 
 ### モデル API 料金（主要3社）
-- URL（OpenAI）: https://platform.openai.com/docs/pricing および https://openai.com/index/ の料金告知
-- URL（Anthropic）: https://www.anthropic.com/pricing
+- URL（OpenAI）: https://developers.openai.com/api/docs/pricing （B-028採用、2026-10-19）
+  - 退役: https://developers.openai.com/api/docs/deprecations （B-028採用、2026-10-19）
+- URL（Anthropic）: https://platform.claude.com/docs/en/about-claude/pricing （B-034採用、2026-10-19）
+  - 退役期限: https://platform.claude.com/docs/en/about-claude/model-deprecations （B-043採用、2026-10-19）
+  - 新モデル・破壊的変更・課金変更: https://platform.claude.com/docs/en/release-notes/overview （B-044採用、2026-10-19）
 - URL（Google）: https://ai.google.dev/gemini-api/docs/pricing
+  - 単価・新機能: https://ai.google.dev/gemini-api/docs/changelog （B-029採用、2026-10-19）
+  - 廃止期限: https://ai.google.dev/gemini-api/docs/deprecations （B-041採用、2026-10-19）
 - 検索キーワード（WebSearch用）: `OpenAI API pricing change 2026` / `Anthropic Claude API pricing 2026` / `Gemini API pricing update 2026` / `LLM API price cut 2026`
-- 取得方法: Google は WebFetch（一次）→ 失敗時 WebSearch。OpenAI / Anthropic は WebSearch（一次ページはオリジン403のため到達不可）
+- 取得方法: 3社とも WebFetch（一次）→ 失敗時 WebSearch（B-028・B-034採用、2026-10-19）
 - 注目点: ティア別の入力・出力単価、キャッシュ単価、値下げ/値上げ、モデル退役に伴う単価改定
 - 頻度: 毎日確認
 - 備考: 2026-08-02 追加（B-009採用）。`ai-tools.md` は「料金・ビジネスモデルの変更」を提案直結の最重要関心に挙げているのに、API 単価の定点ソースが1件も無かった。
   **既存の Business Insider Japan（B-002）は国内向け主要サービスの月次早見表であり、API のティア別単価を告知当日の粒度では追えない。** 2026-08-01 に OpenAI の GPT-5.6 値下げ（Luna 80%減・Terra 20%減、7/30 実施）を1日遅れで二次報道から捕捉した実例がある。
   ⚠️ **2026-08-03 更新: ベンダーごとに到達可否が分かれた。** 実行環境のネットワークポリシーに許可ドメインを追加した結果、`ai.google.dev` が復旧した。
   以下の「ゲートウェイ拒否」と「オリジン403」の定義・判定順序は `fetch-flow.md`「403 を記録する前の判定順序」に集約した（2026-08-06）。本項はその適用例である。
-  - **Google（`ai.google.dev`）**: WebFetch で一次取得する（2026-08-03 に `curl` 200 を確認）。Gemini API のティア別単価は一次ページで確定させ、二次スニペットに頼らない
-  - **OpenAI（`platform.openai.com` / `openai.com`）**: WebSearch を継続する。許可リスト追加でゲートウェイ拒否は解消したが、**ゲートウェイを抜けた先でサイト側が HTTP 403 を返す**ため一次本文は読めない（`www.anthropic.com` と同じ類型）
-  - **Anthropic（`www.anthropic.com`）**: WebSearch を継続する（オリジン403が 2026-04-02 以降継続）
+  - **Google（`ai.google.dev`）**: WebFetch で一次取得する（2026-08-03 に `curl` 200 を確認）。Gemini API のティア別単価は一次ページで確定させ、二次スニペットに頼らない。**廃止期限は `deprecations` ページだけを典拠とし**、`changelog` は単価・新機能の確認に使う（B-041採用、2026-10-19）。Google の一次は `ai.google.dev` と `cloud.google.com` に到達でき、`blog.google` と `www.googlecloudpresscorner.com` には到達できない（B-029採用、2026-10-19）
+  - **OpenAI（`developers.openai.com`）**: WebFetch で一次取得する。`openai.com` はゲートウェイを抜けた先でサイト側が HTTP 403 を返すが、同じベンダーの別ホストである `developers.openai.com` は読める（B-028採用、2026-10-19）
+  - **Anthropic（`platform.claude.com`）**: WebFetch で一次取得する。料金ページはモデル別単価に加えて Batch / Fast mode / データレジデンシー倍率 / プロンプトキャッシュ倍率 / ツール別課金 / Claude Managed Agents の課金を1枚で持つ（B-034採用、2026-10-19）。単価は料金ページとリリースノート、退役期限は廃止ページの2本立てで読む。廃止ページの日付は `Not sooner than`（その日より前には退役しない）の**下限**であり確定した停止日ではないため、確定日は「Deprecation history」節への追加と最低60日前の通知で判定する（B-043採用、2026-10-19）。新モデル・破壊的変更・課金変更の検知はリリースノートを一次とし、`www.anthropic.com/news` の一覧は補助とする（B-044採用、2026-10-19）
 
-  OpenAI / Anthropic の値の裏取りは、複数の二次スニペットの突き合わせと `.last-check-state.md` の旧単価との整合確認で行う。二次情報が割れた場合は `fetch-flow.md` の併記ルールに従う
+  一次に届かない日の値の裏取りは、複数の二次スニペットの突き合わせと `.last-check-state.md` の旧単価との整合確認で行う（B-028・B-034採用、2026-10-19）。二次情報が割れた場合は `fetch-flow.md` の併記ルールに従う
 
+### Google Cloud ブログ（AI・機械学習）
+- URL: https://cloud.google.com/blog/products/ai-machine-learning/
+- 取得方法: WebFetch → WebSearch
+- 注目点: Gemini Enterprise の課金方式・コミット割引率・支出上限とクォータ・オフピーク割引
+- 頻度: 週1回確認
+- 備考: 2026-10-19 追加（B-029採用、B-038 を統合）。一覧には公開日が出ないため、料金に関わる記事は一覧の href から個別 URL を取って WebFetch し、公開日を確定させる
 
 ## 高優先（四半期・月次データソース）
 
@@ -122,11 +133,12 @@ RSS URLの記載がないソースはRSS未提供。年次レポートは公開�
 
 ### Similarweb AI Tracker
 - URL: https://www.similarweb.com/top-websites/ai-chatbots-and-tools/
-- 検索キーワード（WebSearch用）: `Similarweb AI tools traffic share 2026`
-- 取得方法: WebFetch → WebSearch
+- 取得先（発信元の月次投稿）: https://x.com/Similarweb （「Gen AI website traffic share update」の投稿）（B-035採用、2026-10-19）
+- 検索キーワード（WebSearch用）: `Similarweb AI tools traffic share 2026` / `Similarweb "Gen AI website traffic share update" <対象月> <年>`
+- 取得方法: WebSearch（発信元投稿を検索面のタイトルで読む）→ 到達できれば WebFetch（B-035採用、2026-10-19）
 - 注目点: AIツールサイトの月間訪問数・トラフィックシェア。a16zレポートのデータ提供元。トップレベル指標は無料
 - 頻度: 毎日確認
-- 備考: 月次更新だが公開時期が不定のため日次チェックを維持
+- 備考: 月次更新だが公開時期が不定のため日次チェックを維持。投稿タイトルに当月値と過去比較（12カ月前・6カ月前・3カ月前）が全文で載るため、本文へ到達できなくても数値を確定できる。投稿ごとに公表月が異なるため、必ず投稿単位で対象月を確認する（B-035採用、2026-10-19）
 
 ### Business Insider Japan（AIサービス料金早見表）
 - URL: https://www.businessinsider.jp/
@@ -142,6 +154,12 @@ RSS URLの記載がないソースはRSS未提供。年次レポートは公開�
 - 取得方法: WebSearch
 - 注目点: 2022年5月から生成AI利用経験率を日次蓄積。サービス別利用率の時系列推移を四半期レポートで無料公開。提案書で推移グラフを直接引用可
 - 頻度: 週1回。四半期レポート公開時（1月・4月・7月・10月頃）は重点確認
+
+### TLDR AI（週次スイープ）
+- URL: https://tldr.tech/ai
+- 取得方法: WebSearch
+- 注目点: 92万人購読の日刊AIニュースレター。取りこぼし検知に有用
+- 頻度: 週1回。直近7日分の見出しを通読し、`.last-check-state.md` に未収録の項目を catch-up 収録する（B-008採用、2026-10-19）
 
 ## 年次レポート（公開時期に合わせて確認）
 
@@ -202,7 +220,6 @@ RSS URLの記載がないソースはRSS未提供。年次レポートは公開�
 ### ニュースメディア・ニュースレター
 
 - **Ledge.ai** (`ledge.ai`): 国内最大級AI特化メディア。RSS: `ledge.ai/feed/`
-- **TLDR AI** (`tldr.tech/ai`): 92万人購読の日刊AIニュースレター。取りこぼし検知に有用
 - **Import AI** (`importai.substack.com`): Anthropic共同創業者の一人Jack Clark著の週刊AI動向。RSS: `importai.substack.com/feed`
 - **ASCII.jp** (`ascii.jp`): AI専用セクションあり。RSS: `https://ascii.jp/rss.xml`
 
