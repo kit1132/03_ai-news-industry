@@ -45,9 +45,10 @@ RSS URLの記載がないソースはRSS未提供。年次レポートは公開�
 - URL: https://venturebeat.com/category/ai/
 - RSS URL（優先）: https://venturebeat.com/category/ai/feed/
 - 検索キーワード（WebSearch用）: `VentureBeat AI news 2026`
-- 取得方法: RSS → WebSearch
+- 取得方法: WebSearch → RSS（B-045採用、2026-10-20）
 - 注目点: The Decoderと補完関係。資金調達・M&A・IPO等のディール情報とエンタープライズAI導入事例に強い。フルテキストRSS。1日45〜50記事の高ボリューム
 - 頻度: 毎日確認
+- 備考: RSS は届くが、2026-10-17 時点で最新項目が 8/27 のまま更新が止まっている。RSS が取れても最新項目が7日以上前なら更新停止とみなし、WebSearch の結果を使う（B-045採用、2026-10-20。対象はこのソースだけ）
 
 ### Publickey
 - URL: https://www.publickey1.jp/
