@@ -91,7 +91,7 @@ RSS URLの記載がないソースはRSS未提供。年次レポートは公開�
 - 頻度: 週1回確認
 - 備考: 2026-06-07〜06-09 に3日連続「更新なし」のため毎日→週1回に変更（B-003採用、2026-06-10）。速報性不要の調査データであり数日遅れは許容
 
-### モデル API 料金（主要3社）
+### モデル API 料金（主要4社）
 - URL（OpenAI）: https://developers.openai.com/api/docs/pricing （B-028採用、2026-10-19）
   - 退役: https://developers.openai.com/api/docs/deprecations （B-028採用、2026-10-19）
 - URL（Anthropic）: https://platform.claude.com/docs/en/about-claude/pricing （B-034採用、2026-10-19）
@@ -100,8 +100,9 @@ RSS URLの記載がないソースはRSS未提供。年次レポートは公開�
 - URL（Google）: https://ai.google.dev/gemini-api/docs/pricing
   - 単価・新機能: https://ai.google.dev/gemini-api/docs/changelog （B-029採用、2026-10-19）
   - 廃止期限: https://ai.google.dev/gemini-api/docs/deprecations （B-041採用、2026-10-19）
-- 検索キーワード（WebSearch用）: `OpenAI API pricing change 2026` / `Anthropic Claude API pricing 2026` / `Gemini API pricing update 2026` / `LLM API price cut 2026`
-- 取得方法: 3社とも WebFetch（一次）→ 失敗時 WebSearch（B-028・B-034採用、2026-10-19）
+- URL（xAI）: https://docs.x.ai/developers/models （B-042採用、2026-10-21）
+- 検索キーワード（WebSearch用）: `OpenAI API pricing change 2026` / `Anthropic Claude API pricing 2026` / `Gemini API pricing update 2026` / `xAI Grok API pricing 2026` / `LLM API price cut 2026`
+- 取得方法: 4社とも WebFetch（一次）→ 失敗時 WebSearch（B-028・B-034採用、2026-10-19。xAI は B-042採用、2026-10-21）
 - 注目点: ティア別の入力・出力単価、キャッシュ単価、値下げ/値上げ、モデル退役に伴う単価改定
 - 頻度: 毎日確認
 - 備考: 2026-08-02 追加（B-009採用）。`ai-tools.md` は「料金・ビジネスモデルの変更」を提案直結の最重要関心に挙げているのに、API 単価の定点ソースが1件も無かった。
@@ -111,6 +112,7 @@ RSS URLの記載がないソースはRSS未提供。年次レポートは公開�
   - **Google（`ai.google.dev`）**: WebFetch で一次取得する（2026-08-03 に `curl` 200 を確認）。Gemini API のティア別単価は一次ページで確定させ、二次スニペットに頼らない。**廃止期限は `deprecations` ページだけを典拠とし**、`changelog` は単価・新機能の確認に使う（B-041採用、2026-10-19）。Google の一次は `ai.google.dev` と `cloud.google.com` に到達でき、`blog.google` と `www.googlecloudpresscorner.com` には到達できない（B-029採用、2026-10-19）
   - **OpenAI（`developers.openai.com`）**: WebFetch で一次取得する。`openai.com` はゲートウェイを抜けた先でサイト側が HTTP 403 を返すが、同じベンダーの別ホストである `developers.openai.com` は読める（B-028採用、2026-10-19）
   - **Anthropic（`platform.claude.com`）**: WebFetch で一次取得する。料金ページはモデル別単価に加えて Batch / Fast mode / データレジデンシー倍率 / プロンプトキャッシュ倍率 / ツール別課金 / Claude Managed Agents の課金を1枚で持つ（B-034採用、2026-10-19）。単価は料金ページとリリースノート、退役期限は廃止ページの2本立てで読む。廃止ページの日付は `Not sooner than`（その日より前には退役しない）の**下限**であり確定した停止日ではないため、確定日は「Deprecation history」節への追加と最低60日前の通知で判定する（B-043採用、2026-10-19）。新モデル・破壊的変更・課金変更の検知はリリースノートを一次とし、`www.anthropic.com/news` の一覧は補助とする（B-044採用、2026-10-19）
+  - **xAI（`docs.x.ai`）**: WebFetch で一次取得する。モデル一覧ページがモデルごとの入力・出力単価とコンテキスト長を1枚で持つ（旧 URL `docs.x.ai/docs/models` はここへ転送される）。`x.ai` 本体はオリジン403なので使わない。`docs.x.ai` は 2026-10-19 にゲートウェイ拒否が解消した。GitHub Copilot は xAI モデルを提供元の表示単価で従量課金するため、単価の変化は Copilot の費用にも効く（B-042採用、2026-10-21）
 
   一次に届かない日の値の裏取りは、複数の二次スニペットの突き合わせと `.last-check-state.md` の旧単価との整合確認で行う（B-028・B-034採用、2026-10-19）。二次情報が割れた場合は `fetch-flow.md` の併記ルールに従う
   リリースノート／changelog は、`.last-check-state.md` に前回記録した最新エントリの日付（その日付を含む）以降を、項目（箇条書き）単位で列挙させ、日付ごとの項目数を前回と突き合わせる。同じ日付の項目数が増えていたら差分として扱う。本文版（`.md`・`.md.txt`）があるページは curl で取って数える。米国の前日午後に載った項目は翌朝の回収になるので、狙いは当日検出ではなく翌日の確実な回収である。廃止期限の確定は deprecations ページで行う（B-041）（B-031採用、2026-10-20。旧 B-030 の料金・廃止ページの全節列挙は見送り）

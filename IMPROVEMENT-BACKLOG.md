@@ -40,11 +40,6 @@
   - 変更内容: AI コーディングエージェント／エージェント連携基盤に関するセキュリティ開示の定点を登録する。具体的には ①各ベンダーのセキュリティ告知ページ（OpenAI / Anthropic / GitHub の security advisories・changelog のセキュリティタグ）、②検証ベンダーの開示ブログ（`hacktron.ai` / `orca.security` 等）を WebSearch 前提の定点として列挙し、③取得方法欄には「一次はゲートウェイ拒否が多いため WebSearch の複数一致で構成する」と明記する
   - 根拠: 登録ソース外の WebSearch で偶然検知した案件が3件続いている。2026-09-14 の Orca Security（エージェントのスキル・マーケットプレイスへの供給網攻撃）と AIR の偽スキル実験、2026-09-19 の Hacktron による OpenAI 社内 monorepo への侵入チェーン（Discourse の libheif ヒープオーバーフロー ＋ SSO 設定不備 → 連携済み Codex から社内 PR・CVE-2026-32882・修正まで約14時間・$6,500）がいずれも定点ソースに無い。⚠️ **`ai-tools.md` は「組織に導入できるかどうか（チーム利用・料金・セキュリティ）」を関心の方向性に挙げているのに、セキュリティだけ定点が1件も無い。** 本件は kit が日常的に使う Claude Code / Copilot / Codex の「連携済みアカウント」の扱いに直結するため、偶然検知に依存させない（最終確認 2026-10-12 / 回数 9。**2026-10-12**: Anthropic の社内評価中の想定外操作の一次レポート（10/9 付）は `www.anthropic.com/research/investigating-unintended-model-actions` に置かれ、**`/news` 一覧には出なかった**。10-11 は二次報道だけで収録し「一次は未確認」と書いていた。登録する定点に Anthropic の `/research` 一覧を含めないと、同社のインシデント開示は二次経由でしか拾えない。 **2026-09-25**: Plugin4Shell は開示8日目も Copilot 未修正で、追跡経路は二次のみ。**2026-09-24**: Plugin4Shell の追跡が本日も二次のみ（`www.air.security` ゲートウェイ拒否継続）。。**2026-09-23 も一次 `www.air.security` はゲートウェイ拒否で、開示6日目の状態（CVE 未採番・4社とも advisory 未公開・Microsoft は Copilot の修正未提供）はすべて二次スニペットの突き合わせでしか確認できなかった**。**2026-09-22 時点でも Plugin4Shell は CVE 未採番・4社とも security advisory 未公開・実攻撃の記録なしで、Microsoft は GitHub Copilot の修正を出していない**（開示から4日）。本日も `www.air.security` ほか詳報媒体はゲートウェイ拒否のままで、状態の確認そのものを WebSearch のスニペット一致に頼っている。**「修正が出たか」を追跡する対象なのに、追跡経路が二次しかない**という構造が開示から4日間続いている。 回数 2 以前の記録は以下。）
 
-- **B-042: xAI（`x.ai`）の一次料金ページを「モデル API 料金」の定点ソースに追加する**
-  - 対象: `.claude/rules/sites/daily-sources.md`「モデル API 料金（主要3社）」節（節名を「主要4社」に改め、URL・検索キーワード・取得方法の各欄に xAI を追加する）
-  - 変更内容: URL 欄に `https://x.ai/api#pricing`（一次）を追加し、検索キーワードに `xAI Grok API pricing 2026` を追加する。取得方法は **WebSearch を一次**とする（下記のとおり `x.ai` はゲートウェイ拒否が既知のため）
-  - 根拠: 2026-09-21 に GitHub Copilot へ **Grok 4.7** が追加され、`github.blog` の一次エントリは課金を「**provider list pricing under usage-based billing**（プロバイダーの表示価格を従量課金で課金）」と明記している。つまり **xAI の表示単価がそのまま Copilot の従量課金額に入る**構造であり、Copilot を使う組織のコスト試算に直結する。⚠️ 現行の当該節は OpenAI / Anthropic / Google の3社のみを定点にしており、**Copilot 経由で課金される xAI の単価を追う経路が1つも無い**。加えて Copilot のモデルは管理者が明示的に無効化しない限り自動で有効になるため、単価を知らないまま利用が始まりうる。⚠️ 到達性は既に本台帳の「記事本文・一次情報ページの WebFetch 広範403」行で **`x.ai` がゲートウェイ拒否（exit 56）として 2026-08-03 に分類済み**であり、新規の障害登録は不要（最終確認 2026-09-23 / 回数 2。**2026-09-23 に WebSearch で表示単価を確定した**: グローバル $2／$6（キャッシュ入力 $0.55）、200kトークン超で $4.40／$13.20、Fast 版 $4／$12、US リージョンエンドポイントはグローバル比1.1倍。**一次 `x.ai` / `docs.x.ai` はゲートウェイ拒否のままで、二次スニペットの一致でしか構成できない**）
-
 ## 既知の取得障害
 
 - Notebookcheck（`www.notebookcheck.net`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-10-20 / 最終確認 2026-10-20）→ 回避策: WebSearch のスニペットと GIGAZINE の引用で代替（OpenCode 侵害の被害額）
@@ -251,6 +246,7 @@
 
 ## アーカイブ（採用済み・見送り）
 
+- B-042: xAI の一次料金ページを「モデル API 料金」の定点ソースに追加する — **採用済み（2026-10-21・kit の承認によりセッション内で反映）**。URL を提案時の `x.ai/api#pricing`（オリジン403）から `docs.x.ai/developers/models` に変え、取得方法も WebSearch 一次から WebFetch 一次に変えて反映した。`docs.x.ai` は 2026-10-19 にゲートウェイ拒否が解消し、モデル一覧ページにモデル別の入力・出力単価があることを 2026-10-21 に確認した。節名は「主要4社」に改めた
 - 2026-10-20 台帳の棚卸しの続き（kit 承認）で処理した（このアーカイブ移動と同じコミット）
 - B-025: 主要モデルベンダーのヘルプセンター／リリースノートを日次ソースに追加 — **見送り（2026-10-20・kit 判断）**。4ソースとも 01_ai-news-Master が毎日巡回している。03 では重複して巡回しない（リポジトリ間の担当分担）
 - B-026: Microsoft Partner Center の月次 announcements を定点ソースに追加 — **見送り（2026-10-20・kit 判断）**。Partner Center の月次告知は 02_ai-news-Copilot が毎日巡回している（2026-10-19 登録）。03 では重複して巡回しない
