@@ -42,6 +42,8 @@
 
 ## 既知の取得障害
 
+- 関西テレビ（`www.ktv.jp`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-10-24 / 最終確認 2026-10-24）→ 回避策: WebSearch のスニペットで代替（パナソニック グループの生成AI情報送出）
+- フィッシング対策ニュース（`phishing.jp`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-10-24 / 最終確認 2026-10-24）→ 回避策: WebSearch のスニペットで代替
 - Wiz（`www.wiz.io`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-10-22 / 最終確認 2026-10-22）→ 回避策: GIGAZINE・The Decoder の記事で代替
 - Notebookcheck（`www.notebookcheck.net`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-10-20 / 最終確認 2026-10-20）→ 回避策: WebSearch のスニペットと GIGAZINE の引用で代替（OpenCode 侵害の被害額）
 - Carly（`usecarly.com`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-10-14 / 最終確認 2026-10-14）→ 回避策: WebSearch のスニペットで代替（Meta Muse Wonder）
@@ -188,7 +190,7 @@
 - Ledge.ai（`ledge.ai`）: WebFetch 403（初出 2026-07-16 / 最終確認 2026-07-16）→ 回避策: WebSearch のスニペットで代替（本文取得は不可・手動確認推奨）
 - 英 AI Security Institute（`www.aisi.gov.uk` / インシデント報告ブログ）: ゲートウェイ拒否（WebFetch 403 →`curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-08-07 / 最終確認 2026-08-07）→ 回避策: WebSearch のスニペットで代替（一次本文は取得不可・手動確認推奨）。**許可リスト追加で解消しうる類型**であり、AI エージェントの安全性評価の一次ソースとして今後も参照するため、環境の Allowed domains への追加を候補に挙げる
 - GIGAZINE（`gigazine.net`）: ゲートウェイ拒否（WebFetch `EGRESS_BLOCKED` → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-08-08 / 最終確認 2026-10-11）→ 回避策: WebSearch のスニペットで代替（本文取得は不可）。⚠️ **`daily-sources.md`「最優先（日次ニュースソース）」の登録ソースで、本日の DeepSeek 値上げ・Agent Plugins・OpenAI 掲示板の3件はいずれも当ドメインの見出しが検知の起点**だった。許可リスト追加で解消しうる類型のため、環境の Allowed domains への追加を最優先候補に挙げる
-- ITmedia AI＋（`www.itmedia.co.jp`）: ゲートウェイ拒否（`curl` exit 56 / `CONNECT tunnel failed, response 403`。初出 2026-08-08 / 最終確認 2026-08-08）→ 回避策: WebSearch のスニペットで代替。`daily-sources.md` では「旧日次ソース（ブロック中）」として Google News RSS 経由の間接カバー扱いだが、拒否の種別を実測で確定させたのは本日が初
+- ITmedia AI＋（`www.itmedia.co.jp`）: ゲートウェイ拒否（`curl` exit 56 / `CONNECT tunnel failed, response 403`。初出 2026-08-08 / 最終確認 2026-10-24）→ 回避策: WebSearch のスニペットで代替。`daily-sources.md` では「旧日次ソース（ブロック中）」として Google News RSS 経由の間接カバー扱いだが、拒否の種別を実測で確定させたのは本日が初
 - Check Point Research（`research.checkpoint.com`）: ゲートウェイ拒否（`curl` exit 56。初出 2026-08-08 / 最終確認 2026-08-08）→ 回避策: WebSearch のスニペットで代替。Claude Code / Cloudflare Workers の脆弱性一次レポート（CVE 詳細・影響バージョン）の出典であり、許可リスト追加の候補に含める
 - Google Developers Blog（`developers.googleblog.com`）: ゲートウェイ拒否（`curl` exit 56。初出 2026-08-08 / 最終確認 2026-08-31）→ 回避策: WebSearch のスニペットで代替。Agent Plugins・Gemini 関連の一次告知元で、`ai.google.dev` が許可リスト追加で復旧した前例があるため同様に追加候補
 - Cloudflare Blog（`blog.cloudflare.com`）: ゲートウェイ拒否（`curl` exit 56。初出 2026-08-08 / 最終確認 2026-08-08）→ 回避策: WebSearch のスニペットと `www.cloudflare.com/press/` 系の二次まとめで代替。Agents Week の日次告知が当ドメインに集約されており、エージェント基盤の一次情報源として追加候補
