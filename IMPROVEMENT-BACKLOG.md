@@ -42,6 +42,7 @@
 
 ## 既知の取得障害
 
+- Apollo（`www.apollo.com`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-10-26 / 最終確認 2026-10-26）→ 回避策: なし（「テック以外で AI の収益効果なし」は見送り）
 - 関西テレビ（`www.ktv.jp`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-10-24 / 最終確認 2026-10-24）→ 回避策: WebSearch のスニペットで代替（パナソニック グループの生成AI情報送出）
 - フィッシング対策ニュース（`phishing.jp`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-10-24 / 最終確認 2026-10-24）→ 回避策: WebSearch のスニペットで代替
 - Wiz（`www.wiz.io`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-10-22 / 最終確認 2026-10-22）→ 回避策: GIGAZINE・The Decoder の記事で代替
