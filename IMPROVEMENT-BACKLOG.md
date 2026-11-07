@@ -43,12 +43,12 @@
 - **B-047: TLDR AI 週次スイープの取得方法を号別 URL の curl に切り替える**
   - 対象: `.claude/rules/sites/daily-sources.md`「TLDR AI（週次スイープ）」項の「取得方法」欄と URL 欄
   - 変更内容: 取得方法を「WebSearch」から「curl（`https://tldr.tech/ai/YYYY-MM-DD` を直近7日分）→ 失敗時 WebSearch」に変える。号別ページの `<h3>` 見出しを抽出し、`.last-check-state.md` に無い項目だけを catch-up 候補にする
-  - 根拠: 2026-10-27 の記録では「TLDR AI の週次スイープは WebSearch で号が引けず未実施」で、B-008 で決めた週次スイープが実行できていなかった。2026-11-01 に `tldr.tech/ai/2026-10-26`〜`10-30` の5号を curl で取ると全て HTTP 200（約8万バイト）で見出しを抽出でき、未収録だった Claude Enterprise の Chat・Cowork 統合 GA（10/23 付）を8日遅れで拾えた（最終確認 2026-11-01 / 回数 1）
+  - 根拠: 2026-10-27 の記録では「TLDR AI の週次スイープは WebSearch で号が引けず未実施」で、B-008 で決めた週次スイープが実行できていなかった。2026-11-01 に `tldr.tech/ai/2026-10-26`〜`10-30` の5号を curl で取ると全て HTTP 200（約8万バイト）で見出しを抽出でき、未収録だった Claude Enterprise の Chat・Cowork 統合 GA（10/23 付）を8日遅れで拾えた（最終確認 2026-11-08 / 回数 2。**2026-11-08**: `tldr.tech/ai/2026-11-02`〜`11-06` の5号を curl で取得し全て HTTP 200（約8万バイト）。未収録だった Baseten の Grid・Sandboxes（11/4 号）を4日遅れで拾えた。WebSearch では号を引いていない）
 
 - **B-048: Gemini API の一次 URL を AI Studio の移設先へ差し替える**
   - 対象: `.claude/rules/sites/daily-sources.md`「モデル API 料金（主要4社）」項の Google の URL 3本（pricing・changelog・deprecations）と、同項備考の「Google（`ai.google.dev`）」の行
   - 変更内容: URL を `https://aistudio.google.com/docs/pricing`・`/docs/changelog`・`/docs/deprecations` に差し替える。取得方法欄は、`aistudio.google.com` が環境の Allowed domains に入るまで「WebSearch」とし、許可後に WebFetch 一次へ戻す。備考の「2026-08-03 に `curl` 200 を確認」は旧ホストの記録として残し、移設日を追記する
-  - 根拠: 2026-11-03 に `ai.google.dev/gemini-api/docs/changelog`・`/deprecations`・`/pricing` がそれぞれ `aistudio.google.com/docs/` 配下へ 301 を返した（11-02 は curl で取得できていた）。恒久リダイレクトは `fetch-flow.md` の規定によりソース定義の陳腐化として扱う。転送先は WebFetch が ENOTFOUND、curl が exit 56 でゲートウェイ拒否のため、Gemini の単価・廃止日（11/17 停止・12/1 の Argon 値上げ）の一次確認が本日から止まっている。Allowed domains への追加は kit の UI 操作が必要（最終確認 2026-11-07 / 回数 5。**2026-11-07**: 5日連続で 301 → 転送先ゲートウェイ拒否（変化なし）。**2026-11-06**: 4日連続で 301 → 転送先ゲートウェイ拒否（変化なし）。**2026-11-05**: 3日連続で 301 → 転送先ゲートウェイ拒否。11/17 停止・12/1 値上げの再確認ができないまま期限が12日後に迫った。**2026-11-04**: `ai.google.dev/gemini-api/docs/changelog` は本日も 301（転送先 `aistudio.google.com/docs/changelog`）で、転送先は curl exit 56 のまま。WebSearch で得られたのはミラーの10月分のみで、Gemini の 11/17・12/1 は2日連続で一次未確認）
+  - 根拠: 2026-11-03 に `ai.google.dev/gemini-api/docs/changelog`・`/deprecations`・`/pricing` がそれぞれ `aistudio.google.com/docs/` 配下へ 301 を返した（11-02 は curl で取得できていた）。恒久リダイレクトは `fetch-flow.md` の規定によりソース定義の陳腐化として扱う。転送先は WebFetch が ENOTFOUND、curl が exit 56 でゲートウェイ拒否のため、Gemini の単価・廃止日（11/17 停止・12/1 の Argon 値上げ）の一次確認が本日から止まっている。Allowed domains への追加は kit の UI 操作が必要（最終確認 2026-11-08 / 回数 6。**2026-11-08**: 6日連続で転送先に届かず（curl -L が転送先で失敗・変化なし）。**2026-11-07**: 5日連続で 301 → 転送先ゲートウェイ拒否（変化なし）。**2026-11-06**: 4日連続で 301 → 転送先ゲートウェイ拒否（変化なし）。**2026-11-05**: 3日連続で 301 → 転送先ゲートウェイ拒否。11/17 停止・12/1 値上げの再確認ができないまま期限が12日後に迫った。**2026-11-04**: `ai.google.dev/gemini-api/docs/changelog` は本日も 301（転送先 `aistudio.google.com/docs/changelog`）で、転送先は curl exit 56 のまま。WebSearch で得られたのはミラーの10月分のみで、Gemini の 11/17・12/1 は2日連続で一次未確認）
 
 ## 既知の取得障害
 
@@ -56,7 +56,7 @@
 - ithinkdiff（`www.ithinkdiff.com`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-11-06 / 最終確認 2026-11-06）→ 回避策: WebSearch のスニペットで代替（ChatGPT Classic の 2027/1/30 終了・二次報道として併記）
 - Synergy Research（`www.srgresearch.com`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-11-05 / 最終確認 2026-11-05）→ 回避策: Publickey の紹介記事を WebFetch（Q3 2026 のシェア・市場規模）。WebSearch では Synergy 本体の Q3 2026 発表は見つからなかった
 - Menlo Ventures（`menlovc.com`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-11-04 / 最終確認 2026-11-04）→ 回避策: WebSearch のスニペットで代替（2026 State of Enterprise AI の主要数値を取得。配信元 GlobeNewswire・転載先 HPCwire もゲートウェイ拒否）
-- AI Studio ドキュメント（`aistudio.google.com`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-11-03 / 最終確認 2026-11-07）→ 回避策: WebSearch を試したが11月付の changelog 項目は得られず（`ai.google.dev` からの 301 の転送先。URL の陳腐化は B-048）
+- AI Studio ドキュメント（`aistudio.google.com`）: ゲートウェイ拒否（WebFetch ENOTFOUND → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-11-03 / 最終確認 2026-11-08）→ 回避策: WebSearch を試したが11月付の changelog 項目は得られず（`ai.google.dev` からの 301 の転送先。URL の陳腐化は B-048）
 - India Today（`www.indiatoday.in`）: ゲートウェイ拒否（WebFetch 失敗 → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-11-01 / 最終確認 2026-11-01）→ 回避策: なし（AI スタートアップによる Anthropic 侵入の記事は見送り）
 - BBC（`www.bbc.co.uk`）: ゲートウェイ拒否（WebFetch 失敗 → `curl` exit 56 / `CONNECT tunnel failed, response 403` で分類。初出 2026-10-31 / 最終確認 2026-10-31）→ 回避策: WebSearch を試したが10/29〜30の米テック株急落の数値を確定できず（見送り）
 
